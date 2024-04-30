@@ -13,7 +13,7 @@ def createBook(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/booklist')
     else:
         form = BookForm()
     return render(request,'admin/book.html', {'form':form ,'books':books})
@@ -71,7 +71,7 @@ def updateBook(request,book_id):
         form=BookForm(request.POST ,request.FILES, instance=book)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/booklist')
     else:
         form=BookForm(instance=book)
     return render(request,'admin/updateview.html',{'form':form})
@@ -80,7 +80,7 @@ def deleteBook(request,book_id):
     book=Book.objects.get(id=book_id)
     if request.method == "POST":
         book.delete()
-        return redirect('/')
+        return redirect('/booklist')
     return render(request,'admin/deleteview.html',{'book':book})
 
 def SearchBook(request):
